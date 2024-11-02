@@ -3,13 +3,11 @@ function BloodHound {
         [string]$folder
     )
 
-    $basePath = "D:/stuff/projects"
-
-    if (Test-Path "$basePath/$folder") {
-        Set-Location "$basePath/$folder"
+    if (Test-Path "$ProjectDirectory/$folder") {
+        Set-Location "$ProjectDirectory/$folder"
     }
     else {
-        $closestMatch = Get-ChildItem -Path $basePath -Directory | Where-Object {
+        $closestMatch = Get-ChildItem -Path $ProjectDirectory -Directory | Where-Object {
             $_.Name -like "*$folder*" -or $_.Name -match $folder
         } | Sort-Object { ($_ -replace '[^a-zA-Z]', '').Length - $_.Name.Length } | Select-Object -First 1
 
@@ -23,14 +21,17 @@ function BloodHound {
             }
             else {
                 Write-Host "Defaulting to project root."
-                Set-Location $basePath
+                Set-Location $ProjectDirectory
             }
         }
         else {
             Write-Host "Couldn't find $folder."
             Write-Host "Defaulting to project root."
-            Set-Location $basePath
+            Set-Location $ProjectDirectory
         }
     }
-        Get-ChildItem
+    Get-ChildItem
+    if ($OpenCode -eq 'y' -and ![string]::IsNullOrEmpty($folder)) {
+        code .
     }
+}
