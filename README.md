@@ -18,3 +18,7 @@ If you ever want to change the setup options:
 - Open the ps1 file shown in a text editor
 - Look the Bloodhound config section and delete everything in that section
 - Delete the `BloodHound.ps1` file in the same folder as the powershell profile file that you just edited
+
+## Manual Setup
+
+Instructions coming soon!
