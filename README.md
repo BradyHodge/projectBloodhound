@@ -10,14 +10,14 @@ If you ever want to change the setup options:
 
 - Type `$PROFILE` into the terminal
 - Open the ps1 file shown in a text editor
-- Look the Bloodhound config section
+- Look for the Bloodhound config section
 - Edit the variables (they look like `$VariableName = NULL`)
 
 ## To Remove
 
 - Type `$PROFILE` into the terminal
 - Open the ps1 file shown in a text editor
-- Look the Bloodhound config section and delete everything in that section
+- Look for the Bloodhound config section and delete everything in that section
 - Delete the `BloodHound.ps1` file in the same folder as the powershell profile file that you just edited
 
 ## Manual Setup
