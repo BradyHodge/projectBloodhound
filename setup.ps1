@@ -7,30 +7,41 @@ $ProfileDir = Split-Path -Path $ProfilePath
 $BloodhoundFilePath = Join-Path -Path $ProfileDir -ChildPath "BloodHound.ps1"
 
 if (Test-Path -Path $BloodhoundFilePath) {
-    Write-Output "BloodHound has alredy been installed, if there is a problem with the program, try the manual install instructions"
+    Write-Error "BloodHound has alredy been installed!"
+    Write-Output "======================================="
+    Write-Warning "If there is a problem with the program, try the manual install instructions."
+    Write-Output "You can find them at https://github.com/BradyHodge/projectBloodhound"
+    Write-Output "======================================="
+
     exit
 }
 if (!(Test-Path -Path $ProfileDir)) {
     try {
         New-Item -ItemType Directory -Path $ProfileDir -Force
-        Write-Output "Created profile directory at $ProfileDir"
+        Write-Output "Created PowerShell profile directory at $ProfileDir"
     }
     catch {
-        Write-Error "Failed to create profile directory: $_"
+        Write-Error "Failed to create PowerShell profile directory: $_"
         exit
     }
 }
 Write-Output "========== Bloodhound Config =========="
 
-$ProjectDirectory = Read-Host "Where is your project folder? (C:\Users\MyUsername\MyProjects)" -Default '.\'
-if (!(Test-Path -Path $ProjectDirectory)) {
-    Write-Warning "Directory does not exist. Using default"
-    $ProjectDirectory = '.\'
+$ProjectDirectory = Read-Host "Where is your project folder? (C:\Users\MyUsername\MyProjects)"
+if ([string]::IsNullOrWhiteSpace($ProjectDirectory)) {
+    $CurrentDirectory = Get-Location
+    Write-Warning "No directory specified. Using current directory: $CurrentDirectory"
+    $ProjectDirectory = $CurrentDirectory
+}
+elseif (!(Test-Path -Path $ProjectDirectory -ErrorAction SilentlyContinue)) {
+    $CurrentDirectory = Get-Location
+    Write-Warning "Specified directory does not exist. Using current directory: $CurrentDirectory"
+    $ProjectDirectory = $CurrentDirectory
 }
 
 $BloodhoundAlias = Read-Host "Enter the alias you want for BloodHound" -Default 'bh'
-if ($BloodhoundAlias -match '[^\w\-]') {
-    Write-Warning "Invalid alias. Using default: 'bh'"
+if ([string]::IsNullOrWhiteSpace($BloodhoundAlias) -or $BloodhoundAlias -match '[^\w\-]') {
+    Write-Warning "Invalid alias or blank input. Using default."
     $BloodhoundAlias = 'bh'
 }
 
