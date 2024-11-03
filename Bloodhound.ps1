@@ -2,7 +2,7 @@ function BloodHound {
     param (
         [string]$folder
     )
-
+    $bypassOpenCode = $false
     if (Test-Path "$ProjectDirectory/$folder") {
         Set-Location "$ProjectDirectory/$folder"
     }
@@ -22,6 +22,7 @@ function BloodHound {
             else {
                 Write-Host "Defaulting to project root."
                 Set-Location $ProjectDirectory
+                $bypassOpenCode = $true
             }
         }
         else {
@@ -31,7 +32,7 @@ function BloodHound {
         }
     }
     Get-ChildItem
-    if ($OpenCode -eq 'y' -and ![string]::IsNullOrEmpty($folder)) {
+    if ($OpenCode -eq 'y' -and ![string]::IsNullOrEmpty($folder) -and !$bypassOpenCode) {
         code .
     }
 }
