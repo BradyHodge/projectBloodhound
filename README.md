@@ -5,6 +5,7 @@ Quickly navigate to your project directory in the windows terminal, now with fuz
 ## Quick Start
 
 Run the setup script to get started, then type `BloodHound <foldername>` (or `bh <foldername>`).
+
 If you ever want to change the setup options:
 
 - Type `$PROFILE` into the terminal
