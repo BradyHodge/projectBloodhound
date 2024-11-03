@@ -22,13 +22,14 @@ function BloodHound {
             else {
                 Write-Host "Defaulting to project root."
                 Set-Location $ProjectDirectory
-                $bypassOpenCode = $true
+                $bypassOpenCode = $true 
             }
         }
         else {
             Write-Host "Couldn't find $folder."
             Write-Host "Defaulting to project root."
             Set-Location $ProjectDirectory
+            $bypassOpenCode = $true
         }
     }
     Get-ChildItem

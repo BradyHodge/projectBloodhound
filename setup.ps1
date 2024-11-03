@@ -102,3 +102,5 @@ catch {
     Write-Warning "Failed to reload profile: $_"
     Write-Output "Please restart your PowerShell session to apply changes"
 }
+
+Pause
