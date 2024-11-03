@@ -1,6 +1,6 @@
 # Project Bloodhound
 
-Quickly navigate to your project directory in the windows terminal, now with fuzzy finding!
+Quickly navigate to your project directory in the windows terminal, now with fuzzy finding! All you have to do is define where you keep your projects and optionally auto open VS Code.
 
 ## Quick Start
 
